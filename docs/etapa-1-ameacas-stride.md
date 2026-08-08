@@ -105,3 +105,5 @@ A tabela abaixo aplica as seis categorias do STRIDE aos ativos e fluxos do Compr
 | T10 | Denial of Service | API de busca de produtos | Consultas custosas repetidas (scraping agressivo) degradam a performance da busca para todos os usuários | Experiência do usuário degradada, possível perda de vendas |
 | T11 | Elevation of Privilege | Painel administrativo | Vendedor explora falha de autorização e obtém acesso a funções reservadas a administradores | Moderação indevida, acesso a dados de todos os usuários, comprometimento total da plataforma |
 | T12 | Elevation of Privilege | API de pedidos | Cliente comum manipula parâmetros da API para executar ações reservadas a administradores, como aprovar reembolsos | Fraude financeira, perda de controle sobre operações críticas |
+
+As seis categorias do STRIDE foram cobertas com pelo menos duas ameaças concretas cada, totalizando doze ameaças (T01 a T12) relacionadas a ativos e componentes específicos do CompraKi descritos nas seções 8.3 e 8.4.
