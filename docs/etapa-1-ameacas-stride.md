@@ -112,24 +112,6 @@ As seis categorias do STRIDE foram cobertas com pelo menos duas ameaças concret
 
 Cada caso de abuso a seguir foi elaborado a partir de uma das ameaças identificadas na seção 8.5, detalhando como um ator mal-intencionado (ou mesmo um usuário legítimo agindo de má-fé) poderia efetivamente explorá-la.
 
-### CA03 — Negação de compra para obter reembolso indevido
-
-**Ator:** cliente mal-intencionado.
-
-**Objetivo:** obter reembolso de um pedido que efetivamente recebeu.
-
-**Condições:** ausência de registro de auditoria detalhado (log de confirmação de entrega, aceite eletrônico do recebimento).
-
-**Fluxo de abuso:**
-1. O cliente realiza e recebe o pedido normalmente.
-2. O cliente alega ao suporte que nunca fez a compra ou nunca recebeu o produto.
-3. Na ausência de evidências consistentes, a plataforma processa o reembolso.
-4. O cliente mantém o produto e recebe o dinheiro de volta.
-
-**Impacto:** prejuízo financeiro ao vendedor e à plataforma, incentivo a fraudes recorrentes.
-
-**Categorias STRIDE relacionadas:** Repudiation.
-
 ### CA01 — Sequestro de conta de cliente via credenciais roubadas
 
 **Ator:** atacante externo mal-intencionado.
@@ -148,24 +130,6 @@ Cada caso de abuso a seguir foi elaborado a partir de uma das ameaças identific
 **Impacto:** prejuízo financeiro à vítima, exposição de dados pessoais, uso indevido de dados de pagamento salvos.
 
 **Categorias STRIDE relacionadas:** Spoofing, Information Disclosure.
-
-### CA04 — Exposição de dados de clientes por falha de segregação entre vendedores
-
-**Ator:** vendedor legítimo, fazendo uso indevido de um acesso legítimo.
-
-**Objetivo:** obter dados de clientes de outros vendedores para fins comerciais indevidos, como contato direto fora da plataforma.
-
-**Condições:** o painel do vendedor não segrega corretamente os pedidos e dados por identificador do vendedor, permitindo acesso via manipulação de parâmetros.
-
-**Fluxo de abuso:**
-1. O vendedor acessa seu próprio painel normalmente.
-2. Percebe que o identificador do pedido é sequencial e previsível na URL.
-3. Altera o identificador para acessar pedidos de outros vendedores.
-4. Visualiza dados pessoais e de contato de clientes que não são seus.
-
-**Impacto:** violação de privacidade dos clientes, uso comercial indevido de dados, dano à reputação da plataforma.
-
-**Categorias STRIDE relacionadas:** Information Disclosure, Elevation of Privilege.
 
 ### CA02 — Alteração do valor do pedido antes do pagamento
 
@@ -186,23 +150,41 @@ Cada caso de abuso a seguir foi elaborado a partir de uma das ameaças identific
 
 **Categorias STRIDE relacionadas:** Tampering.
 
-### CA06 — Escalonamento de privilégios via API de pedidos
+### CA03 — Negação de compra para obter reembolso indevido
 
-**Ator:** cliente comum mal-intencionado.
+**Ator:** cliente mal-intencionado.
 
-**Objetivo:** executar ações administrativas, como aprovar reembolsos próprios sem análise.
+**Objetivo:** obter reembolso de um pedido que efetivamente recebeu.
 
-**Condições:** a API de pedidos verifica a role do usuário apenas na interface, não em todas as chamadas realizadas ao servidor.
+**Condições:** ausência de registro de auditoria detalhado (log de confirmação de entrega, aceite eletrônico do recebimento).
 
 **Fluxo de abuso:**
-1. O atacante identifica, observando o tráfego do aplicativo, o endpoint usado por administradores para aprovar reembolsos.
-2. Monta manualmente uma requisição para esse endpoint usando sua própria sessão de cliente.
-3. O servidor não revalida a permissão da role antes de executar a ação.
-4. O reembolso é aprovado sem revisão humana.
+1. O cliente realiza e recebe o pedido normalmente.
+2. O cliente alega ao suporte que nunca fez a compra ou nunca recebeu o produto.
+3. Na ausência de evidências consistentes, a plataforma processa o reembolso.
+4. O cliente mantém o produto e recebe o dinheiro de volta.
 
-**Impacto:** fraude financeira direta, perda de controle sobre um processo crítico, precedente para outros abusos semelhantes.
+**Impacto:** prejuízo financeiro ao vendedor e à plataforma, incentivo a fraudes recorrentes.
 
-**Categorias STRIDE relacionadas:** Elevation of Privilege, Tampering.
+**Categorias STRIDE relacionadas:** Repudiation.
+
+### CA04 — Exposição de dados de clientes por falha de segregação entre vendedores
+
+**Ator:** vendedor legítimo, fazendo uso indevido de um acesso legítimo.
+
+**Objetivo:** obter dados de clientes de outros vendedores para fins comerciais indevidos, como contato direto fora da plataforma.
+
+**Condições:** o painel do vendedor não segrega corretamente os pedidos e dados por identificador do vendedor, permitindo acesso via manipulação de parâmetros.
+
+**Fluxo de abuso:**
+1. O vendedor acessa seu próprio painel normalmente.
+2. Percebe que o identificador do pedido é sequencial e previsível na URL.
+3. Altera o identificador para acessar pedidos de outros vendedores.
+4. Visualiza dados pessoais e de contato de clientes que não são seus.
+
+**Impacto:** violação de privacidade dos clientes, uso comercial indevido de dados, dano à reputação da plataforma.
+
+**Categorias STRIDE relacionadas:** Information Disclosure, Elevation of Privilege.
 
 ### CA05 — Sobrecarga do checkout em datas de alta demanda
 
@@ -221,3 +203,33 @@ Cada caso de abuso a seguir foi elaborado a partir de uma das ameaças identific
 **Impacto:** perda direta de vendas, insatisfação de clientes e vendedores, dano à reputação da plataforma.
 
 **Categorias STRIDE relacionadas:** Denial of Service.
+
+### CA06 — Escalonamento de privilégios via API de pedidos
+
+**Ator:** cliente comum mal-intencionado.
+
+**Objetivo:** executar ações administrativas, como aprovar reembolsos próprios sem análise.
+
+**Condições:** a API de pedidos verifica a role do usuário apenas na interface, não em todas as chamadas realizadas ao servidor.
+
+**Fluxo de abuso:**
+1. O atacante identifica, observando o tráfego do aplicativo, o endpoint usado por administradores para aprovar reembolsos.
+2. Monta manualmente uma requisição para esse endpoint usando sua própria sessão de cliente.
+3. O servidor não revalida a permissão da role antes de executar a ação.
+4. O reembolso é aprovado sem revisão humana.
+
+**Impacto:** fraude financeira direta, perda de controle sobre um processo crítico, precedente para outros abusos semelhantes.
+
+**Categorias STRIDE relacionadas:** Elevation of Privilege, Tampering.
+
+## 8.7 Considerações finais
+
+As ameaças consideradas mais preocupantes foram as que permitem fraude financeira direta com pouco esforço técnico: a elevação de privilégio via API de pedidos (CA06) e a alteração do valor do pedido no checkout (CA02), pois ambas exploram a ausência de revalidação no servidor, um problema estrutural que pode se repetir em outros pontos do sistema.
+
+Os ativos mais importantes identificados foram os dados de pagamento, as credenciais de acesso e a integridade dos valores de pedidos e preços — são os ativos cuja violação gera prejuízo financeiro direto e imediato, além de dados pessoais dos usuários, cuja exposição tem implicações legais (LGPD) e reputacionais.
+
+Os tipos de abuso com maior potencial de impacto são os que envolvem manipulação de valores financeiros (CA02, CA06) e exposição de dados pessoais (CA01, CA04), por afetarem diretamente a confiança dos usuários na plataforma e poderem gerar prejuízo financeiro direto, além de problemas jurídicos.
+
+A principal dificuldade do grupo foi definir o nível de detalhe adequado sem ter uma implementação real do CompraKi como referência, apoiando-se em como marketplaces de e-commerce costumam funcionar na prática. Outra dificuldade foi evitar sobreposição excessiva entre categorias do STRIDE que naturalmente se relacionam, como Information Disclosure e Elevation of Privilege no mesmo caso de abuso (CA04).
+
+Como possíveis medidas de proteção a explorar em etapas futuras, destacam-se: autenticação multifator para contas de cliente e vendedor, revalidação de valores e permissões sempre no servidor (nunca confiando apenas na interface), e registro de auditoria (logs) para ações sensíveis como confirmação de entrega e aprovação de reembolsos.
