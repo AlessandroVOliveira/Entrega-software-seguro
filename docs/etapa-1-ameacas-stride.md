@@ -185,3 +185,21 @@ Cada caso de abuso a seguir foi elaborado a partir de uma das ameaças identific
 **Impacto:** prejuízo financeiro direto ao vendedor ou à plataforma.
 
 **Categorias STRIDE relacionadas:** Tampering.
+
+### CA06 — Escalonamento de privilégios via API de pedidos
+
+**Ator:** cliente comum mal-intencionado.
+
+**Objetivo:** executar ações administrativas, como aprovar reembolsos próprios sem análise.
+
+**Condições:** a API de pedidos verifica a role do usuário apenas na interface, não em todas as chamadas realizadas ao servidor.
+
+**Fluxo de abuso:**
+1. O atacante identifica, observando o tráfego do aplicativo, o endpoint usado por administradores para aprovar reembolsos.
+2. Monta manualmente uma requisição para esse endpoint usando sua própria sessão de cliente.
+3. O servidor não revalida a permissão da role antes de executar a ação.
+4. O reembolso é aprovado sem revisão humana.
+
+**Impacto:** fraude financeira direta, perda de controle sobre um processo crítico, precedente para outros abusos semelhantes.
+
+**Categorias STRIDE relacionadas:** Elevation of Privilege, Tampering.
