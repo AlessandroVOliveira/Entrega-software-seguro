@@ -68,3 +68,21 @@ O CompraKi é um marketplace de e-commerce: uma plataforma onde vendedores terce
 | Painel administrativo | Interface usada pelos administradores para moderar e decidir disputas | Sim |
 
 Os elementos marcados como ativo crítico são aqueles cujo acesso indevido, alteração, destruição ou indisponibilidade causaria prejuízo financeiro direto, violação de privacidade ou perda de confiança na plataforma — por isso recebem atenção prioritária na modelagem de ameaças (seção 8.5).
+
+## 8.4 Visão geral da arquitetura ou fluxo
+
+O diagrama de contexto abaixo (fonte versionada em [`diagramas/etapa-1/diagrama-contexto.mmd`](../diagramas/etapa-1/diagrama-contexto.mmd)) mostra como os três perfis de usuário interagem com a aplicação CompraKi e como o backend se comunica com o banco de dados e com serviços externos:
+
+```mermaid
+flowchart LR
+    Cliente -->|login, compra, avaliacao, mensagens| App[Aplicacao CompraKi Web/Mobile]
+    Vendedor -->|cadastra produtos, gerencia pedidos, responde clientes| App
+    Administrador -->|modera, resolve disputas| App
+
+    App --> API[API / Backend]
+    API --> DB[(Banco de Dados)]
+    API --> Pagamento[Servico de Pagamento externo]
+    API --> Notificacao[Servico de Notificacao / Mensagens]
+```
+
+Clientes, vendedores e administradores interagem com a mesma aplicação (web ou mobile), cada um com permissões diferentes. Toda ação passa pela API/Backend, que é responsável por aplicar as regras de autorização antes de ler ou gravar dados no banco. O backend também se comunica com dois serviços externos: um serviço de pagamento (que processa a cobrança efetiva) e um serviço de notificação/mensagens (que entrega mensagens entre cliente e vendedor e avisos do sistema). Por serem componentes externos, esses dois serviços representam pontos de confiança adicionais que também precisam ser considerados na análise de ameaças.

@@ -1,0 +1,9 @@
+flowchart LR
+    Cliente -->|login, compra, avaliacao, mensagens| App[Aplicacao CompraKi Web/Mobile]
+    Vendedor -->|cadastra produtos, gerencia pedidos, responde clientes| App
+    Administrador -->|modera, resolve disputas| App
+
+    App --> API[API / Backend]
+    API --> DB[(Banco de Dados)]
+    API --> Pagamento[Servico de Pagamento externo]
+    API --> Notificacao[Servico de Notificacao / Mensagens]
