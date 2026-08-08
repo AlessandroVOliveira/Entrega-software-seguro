@@ -107,3 +107,25 @@ A tabela abaixo aplica as seis categorias do STRIDE aos ativos e fluxos do Compr
 | T12 | Elevation of Privilege | API de pedidos | Cliente comum manipula parâmetros da API para executar ações reservadas a administradores, como aprovar reembolsos | Fraude financeira, perda de controle sobre operações críticas |
 
 As seis categorias do STRIDE foram cobertas com pelo menos duas ameaças concretas cada, totalizando doze ameaças (T01 a T12) relacionadas a ativos e componentes específicos do CompraKi descritos nas seções 8.3 e 8.4.
+
+## 8.6 Casos de abuso
+
+Cada caso de abuso a seguir foi elaborado a partir de uma das ameaças identificadas na seção 8.5, detalhando como um ator mal-intencionado (ou mesmo um usuário legítimo agindo de má-fé) poderia efetivamente explorá-la.
+
+### CA03 — Negação de compra para obter reembolso indevido
+
+**Ator:** cliente mal-intencionado.
+
+**Objetivo:** obter reembolso de um pedido que efetivamente recebeu.
+
+**Condições:** ausência de registro de auditoria detalhado (log de confirmação de entrega, aceite eletrônico do recebimento).
+
+**Fluxo de abuso:**
+1. O cliente realiza e recebe o pedido normalmente.
+2. O cliente alega ao suporte que nunca fez a compra ou nunca recebeu o produto.
+3. Na ausência de evidências consistentes, a plataforma processa o reembolso.
+4. O cliente mantém o produto e recebe o dinheiro de volta.
+
+**Impacto:** prejuízo financeiro ao vendedor e à plataforma, incentivo a fraudes recorrentes.
+
+**Categorias STRIDE relacionadas:** Repudiation.
