@@ -93,5 +93,7 @@ A tabela abaixo aplica as seis categorias do STRIDE aos ativos e fluxos do Compr
 
 | ID | Categoria STRIDE | Componente ou ativo | Ameaça identificada | Possível impacto |
 |---|---|---|---|---|
+| T01 | Spoofing | Conta do cliente | Atacante usa credenciais roubadas (phishing ou reuso de senha) para acessar a conta e realizar compras ou alterar dados | Compras fraudulentas, exposição de dados pessoais, prejuízo financeiro à vítima |
+| T02 | Spoofing | Conta do vendedor | Atacante cria uma conta de vendedor falsa se passando por uma marca conhecida para enganar compradores | Fraude contra clientes, dano à reputação da plataforma |
 | T09 | Denial of Service | Checkout/pagamento | Atacante envia grande volume de requisições ao checkout, sobrecarregando o serviço em datas de alta demanda | Indisponibilidade nas vendas, perda financeira direta |
 | T10 | Denial of Service | API de busca de produtos | Consultas custosas repetidas (scraping agressivo) degradam a performance da busca para todos os usuários | Experiência do usuário degradada, possível perda de vendas |
