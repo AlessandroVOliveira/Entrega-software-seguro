@@ -21,4 +21,6 @@ Sistema analisado: **CompraKi**, um marketplace de e-commerce (clientes, vendedo
 |---|---|
 | Etapa 1 — Casos de abuso e STRIDE | [`docs/etapa-1-ameacas-stride.md`](docs/etapa-1-ameacas-stride.md) |
 
+Os diagramas usados no documento (fonte e renderização) ficam em [`diagramas/`](diagramas/), organizados por etapa.
+
 Demais etapas serão adicionadas conforme o trabalho avança.
