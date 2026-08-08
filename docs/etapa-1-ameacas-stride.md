@@ -42,3 +42,29 @@ O CompraKi é um marketplace de e-commerce: uma plataforma onde vendedores terce
 **Informações armazenadas ou transmitidas:** dados de cadastro (nome, e-mail, CPF, endereço), credenciais de acesso, dados de pagamento, histórico de pedidos, mensagens entre clientes e vendedores, avaliações e comentários, catálogo de produtos e preços.
 
 **Recursos que precisam ser protegidos:** contas de usuário (contra acesso indevido), dados de pagamento, integridade dos valores de pedidos e preços, autenticidade das avaliações, e as funções administrativas (que, se comprometidas, afetam toda a plataforma).
+
+## 8.3 Usuários, ativos e pontos de interação
+
+**Usuários e perfis de acesso:**
+- Cliente (comprador): navega, compra, avalia e troca mensagens com vendedores.
+- Vendedor: cadastra produtos, gerencia seus próprios pedidos e responde clientes.
+- Administrador: modera anúncios, resolve disputas e gerencia contas.
+
+**Principais elementos do sistema:**
+
+| Elemento | Descrição | Ativo crítico? |
+|---|---|---|
+| Credenciais de login | Senha/token de autenticação de clientes, vendedores e administradores | Sim |
+| Dados pessoais | Nome, CPF, endereço de entrega | Sim |
+| Dados de pagamento | Número de cartão (tokenizado) ou dados de pix | Sim |
+| Histórico de pedidos | Registro de compras, valores e status | Sim |
+| Avaliações | Notas e comentários sobre produtos e vendedores | Não (mas sensível a manipulação) |
+| Mensagens | Comunicação direta entre cliente e vendedor | Não (mas contém dados pessoais) |
+| Catálogo de produtos | Descrições, preços e estoque cadastrados pelos vendedores | Sim |
+| Banco de dados | Armazena usuários, pedidos, produtos e mensagens | Sim |
+| API/Backend | Camada que processa regras de negócio e autorização | Sim |
+| Aplicativo web/mobile | Interface usada por clientes e vendedores | Não |
+| Serviço de pagamento externo | Processa a cobrança efetiva (integração de terceiros) | Sim |
+| Painel administrativo | Interface usada pelos administradores para moderar e decidir disputas | Sim |
+
+Os elementos marcados como ativo crítico são aqueles cujo acesso indevido, alteração, destruição ou indisponibilidade causaria prejuízo financeiro direto, violação de privacidade ou perda de confiança na plataforma — por isso recebem atenção prioritária na modelagem de ameaças (seção 8.5).
