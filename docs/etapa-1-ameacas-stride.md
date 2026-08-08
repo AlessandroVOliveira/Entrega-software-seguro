@@ -148,3 +148,21 @@ Cada caso de abuso a seguir foi elaborado a partir de uma das ameaças identific
 **Impacto:** prejuízo financeiro à vítima, exposição de dados pessoais, uso indevido de dados de pagamento salvos.
 
 **Categorias STRIDE relacionadas:** Spoofing, Information Disclosure.
+
+### CA04 — Exposição de dados de clientes por falha de segregação entre vendedores
+
+**Ator:** vendedor legítimo, fazendo uso indevido de um acesso legítimo.
+
+**Objetivo:** obter dados de clientes de outros vendedores para fins comerciais indevidos, como contato direto fora da plataforma.
+
+**Condições:** o painel do vendedor não segrega corretamente os pedidos e dados por identificador do vendedor, permitindo acesso via manipulação de parâmetros.
+
+**Fluxo de abuso:**
+1. O vendedor acessa seu próprio painel normalmente.
+2. Percebe que o identificador do pedido é sequencial e previsível na URL.
+3. Altera o identificador para acessar pedidos de outros vendedores.
+4. Visualiza dados pessoais e de contato de clientes que não são seus.
+
+**Impacto:** violação de privacidade dos clientes, uso comercial indevido de dados, dano à reputação da plataforma.
+
+**Categorias STRIDE relacionadas:** Information Disclosure, Elevation of Privilege.
