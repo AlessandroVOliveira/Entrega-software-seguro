@@ -86,3 +86,12 @@ flowchart LR
 ```
 
 Clientes, vendedores e administradores interagem com a mesma aplicação (web ou mobile), cada um com permissões diferentes. Toda ação passa pela API/Backend, que é responsável por aplicar as regras de autorização antes de ler ou gravar dados no banco. O backend também se comunica com dois serviços externos: um serviço de pagamento (que processa a cobrança efetiva) e um serviço de notificação/mensagens (que entrega mensagens entre cliente e vendedor e avisos do sistema). Por serem componentes externos, esses dois serviços representam pontos de confiança adicionais que também precisam ser considerados na análise de ameaças.
+
+## 8.5 Modelagem de ameaças com STRIDE
+
+A tabela abaixo aplica as seis categorias do STRIDE aos ativos e fluxos do CompraKi descritos nas seções anteriores. Cada categoria recebeu ao menos duas ameaças concretas, relacionadas a componentes específicos do sistema.
+
+| ID | Categoria STRIDE | Componente ou ativo | Ameaça identificada | Possível impacto |
+|---|---|---|---|---|
+| T09 | Denial of Service | Checkout/pagamento | Atacante envia grande volume de requisições ao checkout, sobrecarregando o serviço em datas de alta demanda | Indisponibilidade nas vendas, perda financeira direta |
+| T10 | Denial of Service | API de busca de produtos | Consultas custosas repetidas (scraping agressivo) degradam a performance da busca para todos os usuários | Experiência do usuário degradada, possível perda de vendas |
