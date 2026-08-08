@@ -203,3 +203,21 @@ Cada caso de abuso a seguir foi elaborado a partir de uma das ameaças identific
 **Impacto:** fraude financeira direta, perda de controle sobre um processo crítico, precedente para outros abusos semelhantes.
 
 **Categorias STRIDE relacionadas:** Elevation of Privilege, Tampering.
+
+### CA05 — Sobrecarga do checkout em datas de alta demanda
+
+**Ator:** atacante externo (concorrente desleal ou mal-intencionado) explorando um pico de tráfego não gerenciado.
+
+**Objetivo:** tornar o checkout indisponível para prejudicar as vendas da plataforma.
+
+**Condições:** ausência de limitação de requisições (rate limiting) e de proteção contra automação no fluxo de checkout.
+
+**Fluxo de abuso:**
+1. O atacante identifica o endpoint de checkout.
+2. Automatiza o envio de um grande volume de requisições simultâneas a esse endpoint.
+3. O serviço de checkout fica sobrecarregado, tornando-se lento ou indisponível.
+4. Clientes legítimos não conseguem finalizar suas compras durante o período do ataque.
+
+**Impacto:** perda direta de vendas, insatisfação de clientes e vendedores, dano à reputação da plataforma.
+
+**Categorias STRIDE relacionadas:** Denial of Service.
