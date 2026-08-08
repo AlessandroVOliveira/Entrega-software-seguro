@@ -166,3 +166,22 @@ Cada caso de abuso a seguir foi elaborado a partir de uma das ameaças identific
 **Impacto:** violação de privacidade dos clientes, uso comercial indevido de dados, dano à reputação da plataforma.
 
 **Categorias STRIDE relacionadas:** Information Disclosure, Elevation of Privilege.
+
+### CA02 — Alteração do valor do pedido antes do pagamento
+
+**Ator:** usuário mal-intencionado (cliente).
+
+**Objetivo:** pagar um valor menor do que o real por um pedido.
+
+**Condições:** a validação do valor do pedido ocorre apenas no lado do cliente (aplicativo ou navegador), sem revalidação no servidor no momento do pagamento.
+
+**Fluxo de abuso:**
+1. O atacante monta o carrinho normalmente.
+2. Intercepta a requisição de checkout usando um proxy ou as ferramentas de desenvolvedor do navegador.
+3. Altera o campo de valor total antes de enviar a requisição.
+4. O servidor aceita o valor alterado sem revalidá-lo.
+5. O pagamento é processado com o valor incorreto.
+
+**Impacto:** prejuízo financeiro direto ao vendedor ou à plataforma.
+
+**Categorias STRIDE relacionadas:** Tampering.
