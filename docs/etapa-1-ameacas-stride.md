@@ -129,3 +129,22 @@ Cada caso de abuso a seguir foi elaborado a partir de uma das ameaças identific
 **Impacto:** prejuízo financeiro ao vendedor e à plataforma, incentivo a fraudes recorrentes.
 
 **Categorias STRIDE relacionadas:** Repudiation.
+
+### CA01 — Sequestro de conta de cliente via credenciais roubadas
+
+**Ator:** atacante externo mal-intencionado.
+
+**Objetivo:** realizar compras fraudulentas e acessar dados pessoais da vítima.
+
+**Condições:** a plataforma não exige verificação adicional (MFA) e o cliente reutiliza, no CompraKi, uma senha já vazada em outro serviço.
+
+**Fluxo de abuso:**
+1. O atacante obtém credenciais vazadas em outro serviço (data breach, phishing).
+2. Testa as mesmas credenciais no CompraKi.
+3. Consegue acesso à conta sem gerar alerta ao usuário legítimo.
+4. Altera o endereço de entrega e realiza compras usando o cartão salvo.
+5. Acessa o histórico de pedidos e os dados pessoais da vítima.
+
+**Impacto:** prejuízo financeiro à vítima, exposição de dados pessoais, uso indevido de dados de pagamento salvos.
+
+**Categorias STRIDE relacionadas:** Spoofing, Information Disclosure.
