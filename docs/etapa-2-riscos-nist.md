@@ -43,6 +43,8 @@ Cada ameaça relevante da Etapa 1 originou um risco correspondente, mantendo o m
 | R02 | Spoofing (T02) | Atacante cria uma conta de vendedor falsa se passando por marca conhecida para enganar compradores | Cadastro de vendedor sem verificação de identidade ou documentação | 3 | 2 | 6 | Médio |
 | R03 | Tampering (T03) | Usuário intercepta e altera o valor do pedido antes da confirmação do pagamento | Validação do valor do pedido ocorre apenas no cliente, sem revalidação no servidor | 3 | 3 | 9 | Alto |
 | R04 | Tampering (T04) | Vendedor ou atacante altera preço ou descrição de um anúncio já aprovado, sem nova validação | Ausência de reaprovação automática após edição de um anúncio publicado | 2 | 2 | 4 | Médio |
+| R05 | Repudiation (T05) | Cliente nega ter realizado ou recebido uma compra para tentar obter reembolso indevido | Ausência de registro de auditoria confiável de confirmação de entrega | 3 | 2 | 6 | Médio |
+| R06 | Repudiation (T06) | Vendedor nega ter combinado um prazo ou condição informada por mensagem a um cliente | Mensagens sem registro imutável ou confiável da conversa | 2 | 1 | 2 | Baixo |
 
 ## 13.5 Justificativas
 
@@ -53,3 +55,7 @@ Cada ameaça relevante da Etapa 1 originou um risco correspondente, mantendo o m
 **R03 — Alteração do valor do pedido:** a probabilidade foi classificada como média-alta (3) porque ferramentas de interceptação de requisições (proxy, ferramentas de desenvolvedor do navegador) são de fácil acesso, tornando a condição de exploração plausível em situações comuns de uso. O impacto foi classificado como alto (3) porque gera prejuízo financeiro direto e pode se repetir em múltiplos pedidos até ser corrigido.
 
 **R04 — Alteração de catálogo após aprovação:** a probabilidade foi classificada como média-baixa (2) porque depende de um vendedor especificamente mal-intencionado, uma condição menos genérica que um ataque externo. O impacto foi classificado como moderado (2) porque afeta compradores individuais de forma pontual e é recuperável via moderação e reembolso.
+
+**R05 — Negação de compra para reembolso indevido:** a probabilidade foi classificada como média-alta (3) porque fraudes de reembolso por negação de recebimento são um padrão comum e recorrente em e-commerce, não exigindo capacidade técnica. O impacto foi classificado como moderado (2) porque o prejuízo é pontual por pedido e recuperável, embora possa se acumular se o padrão se repetir com frequência.
+
+**R06 — Negação de combinação por mensagem:** a probabilidade foi classificada como média-baixa (2) porque depende de uma disputa específica surgir entre cliente e vendedor. O impacto foi classificado como baixo (1) porque o transtorno é pontual e pode ser mediado pela equipe de suporte, sem prejuízo financeiro direto à plataforma.
