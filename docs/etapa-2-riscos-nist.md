@@ -131,6 +131,8 @@ Apenas as funções efetivamente relacionadas a cada risco foram marcadas, evita
 |---|---|---|---|---|---|---|
 | R01 | | | X | X | X | |
 | R02 | X | | X | | | |
+| R03 | | | X | X | | |
+| R04 | | | X | X | | |
 
 ## 14.4 Plano de tratamento
 
@@ -138,6 +140,8 @@ Apenas as funções efetivamente relacionadas a cada risco foram marcadas, evita
 |---|---|---|---|---|---|
 | R01 | Reduzir | Autenticação multifator (MFA) obrigatória no login; detecção de login a partir de dispositivo ou localização não reconhecida, com notificação ao usuário | Protect, Detect, Respond | Equipe de desenvolvimento (autenticação) | Teste automatizado bloqueando login sem o segundo fator; log de alertas de login suspeito |
 | R02 | Reduzir | Verificação de documento (CPF/CNPJ) e aprovação manual do primeiro anúncio de novos vendedores | Govern, Protect | Equipe de operações e moderação | Checklist de aprovação de vendedor; taxa de contas suspensas por documentação inválida |
+| R03 | Reduzir | Revalidação do valor total do pedido no servidor no momento do pagamento, ignorando valores recebidos do cliente | Protect, Detect | Equipe de backend e pagamentos | Teste automatizado que altera o valor via requisição direta e confirma a rejeição ou correção pelo servidor |
+| R04 | Reduzir | Exigir reaprovação de moderação quando preço ou descrição de um anúncio já aprovado é alterado; manter histórico de versões do anúncio | Protect, Detect | Equipe de moderação e backend | Log de versões de anúncios; teste confirmando bloqueio de publicação sem reaprovação |
 
 ## 14.6 Estimativa do risco residual
 
@@ -145,3 +149,5 @@ Apenas as funções efetivamente relacionadas a cada risco foram marcadas, evita
 |---|---|---|---|
 | R01 | Alto | Baixo | Taxa de bloqueio de login suspeito acima de 95% em testes de simulação |
 | R02 | Médio | Baixo | 100% dos novos vendedores com documento verificado antes da primeira venda |
+| R03 | Alto | Baixo | Teste automatizado de revalidação do valor aprova em 100% dos casos de tentativa de alteração |
+| R04 | Médio | Baixo | Nenhum anúncio alterado publicado sem reaprovação, confirmado em auditoria mensal |
