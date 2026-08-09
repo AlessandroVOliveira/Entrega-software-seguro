@@ -137,6 +137,8 @@ Apenas as funções efetivamente relacionadas a cada risco foram marcadas, evita
 | R06 | X | | | | | |
 | R07 | X | X | X | X | X | |
 | R08 | | | X | X | | |
+| R09 | | | X | X | | X |
+| R10 | | | X | | | |
 
 ## 14.4 Plano de tratamento
 
@@ -150,6 +152,8 @@ Apenas as funções efetivamente relacionadas a cada risco foram marcadas, evita
 | R06 | Aceitar | Aceitação formal do risco pela coordenação de atendimento, com mediação manual de disputas com base no histórico de mensagens disponível | Govern | Coordenação de atendimento ao cliente | Registro da decisão de aceitação; revisão semestral do volume de disputas relacionadas a mensagens |
 | R07 | Reduzir | Corrigir o controle de acesso na API (verificar propriedade do recurso antes de retornar dados, eliminando a referência insegura a objeto); criptografar dados de pagamento e dados pessoais em repouso; política de proteção de dados alinhada à LGPD | Govern, Identify, Protect, Detect, Respond | Equipe de backend e segurança | Teste de penetração confirmando ausência da falha de autorização; relatório de criptografia aplicada; alertas de acesso anômalo configurados |
 | R08 | Reduzir | Corrigir a consulta do painel do vendedor para filtrar sempre pelo identificador do vendedor autenticado, nunca aceitando identificador vindo do cliente sem validação; log de tentativas de acesso a pedidos de outros vendedores | Protect, Detect | Equipe de backend | Teste automatizado tentando acessar pedido de outro vendedor e confirmando bloqueio |
+| R09 | Reduzir | Limitação de requisições (rate limiting) no endpoint de checkout; proteção anti-automação em picos de tráfego; plano de autoscaling para datas de alta demanda | Protect, Detect, Recover | Equipe de infraestrutura | Teste de carga simulando pico de requisições; métricas de disponibilidade do checkout durante o teste |
+| R10 | Reduzir | Limitação de requisições na API de busca por usuário/IP | Protect | Equipe de backend | Métricas de requisições bloqueadas por excesso na API de busca |
 
 ## 14.6 Estimativa do risco residual
 
@@ -163,3 +167,5 @@ Apenas as funções efetivamente relacionadas a cada risco foram marcadas, evita
 | R06 | Baixo | Baixo (risco aceito, sem redução planejada) | Revisão semestral confirma que o volume de disputas de mensagens permanece dentro do limite aceitável |
 | R07 | Alto | Médio | Teste de penetração não encontra falha crítica de autorização e a criptografia dos dados sensíveis é confirmada em auditoria |
 | R08 | Médio | Baixo | Teste automatizado de segregação por vendedor aprova em 100% dos casos |
+| R09 | Alto | Médio | Checkout mantém disponibilidade acima do SLA definido durante teste de carga simulando o pico real observado em datas promocionais |
+| R10 | Baixo | Baixo | Limitação de requisições reduz o volume de scraping sem afetar usuários legítimos, conforme monitoramento |
