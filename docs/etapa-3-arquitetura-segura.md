@@ -19,3 +19,34 @@ Esta etapa transforma os riscos e controles definidos na [Etapa 2](etapa-2-risco
 | R03 | Confiança em validação feita no lado do cliente | CWE-602 (Client-Side Enforcement of Server-Side Security) | Permite que o cliente altere o valor do pedido porque a validação definitiva do valor não ocorre no servidor no momento do pagamento |
 
 Os três mapeamentos cobrem os três riscos de maior prioridade da Etapa 2, mostrando que, apesar de originarem de categorias STRIDE diferentes (Elevation of Privilege, Information Disclosure e Tampering), compartilham a mesma causa raiz arquitetural: falta de revalidação no servidor.
+
+## 18.3 Diagrama da arquitetura segura
+
+O diagrama abaixo (fonte versionada em [`diagramas/etapa-3/arquitetura-segura.mmd`](../diagramas/etapa-3/arquitetura-segura.mmd)) evolui o diagrama de contexto da Etapa 1 adicionando os controles que atendem aos requisitos RS01–RS03: um serviço de autenticação dedicado com suporte a MFA, e uma camada de autorização explícita entre a API e o banco de dados, responsável por revalidar tanto a role do usuário quanto a propriedade do recurso solicitado.
+
+```mermaid
+flowchart LR
+    Cliente --> App[Aplicacao CompraKi Web/Mobile]
+    Vendedor --> App
+    Administrador --> App
+
+    App --> Auth[Servico de Autenticacao com MFA]
+    App --> API[API / Backend]
+
+    API --> Authz[Camada de Autorizacao\nrevalida role e propriedade do recurso]
+    Authz --> DB[(Banco de Dados)]
+
+    API --> Pagamento[Servico de Pagamento externo]
+    API --> Notificacao[Servico de Notificacao / Mensagens]
+    API --> Logs[Logs e Monitoramento]
+```
+
+A camada de autorização é o principal controle novo em relação ao diagrama da Etapa 1: toda chamada à API passa por ela antes de tocar o banco de dados, garantindo que RS01 (revalidação de role) e RS02 (verificação de propriedade do recurso) sejam aplicados de forma centralizada, em vez de depender de cada rota implementar sua própria verificação. Os logs e o monitoramento também passam a aparecer explicitamente, dando suporte à detecção de tentativas de violação desses controles.
+
+## 18.4 Decisões de arquitetura
+
+| Decisão | Risco tratado | Justificativa |
+|---|---|---|
+| Revalidar sempre no servidor valores e permissões recebidos do cliente ou da interface (nunca confiar neles isoladamente) | R03, R12 | Ocultar campos na interface ou validar apenas no aplicativo não impede que um atacante monte a requisição diretamente; a validação só é confiável quando repetida no servidor |
+| Introduzir uma camada de autorização centralizada, responsável por verificar a propriedade do recurso antes de qualquer leitura ou gravação de dados sensíveis | R07 | Concentrar essa verificação em um único componente evita que cada rota da API implemente sua própria lógica de autorização de forma inconsistente, reduzindo a chance de uma rota esquecer a verificação |
+| Isolar a autenticação em um serviço dedicado com suporte a autenticação multifator, separado da lógica de negócio da aplicação | R01 | Um serviço de autenticação dedicado facilita adicionar MFA e detecção de login anômalo sem misturar essa responsabilidade com o restante das regras de negócio do CompraKi |

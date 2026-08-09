@@ -1,0 +1,14 @@
+flowchart LR
+    Cliente --> App[Aplicacao CompraKi Web/Mobile]
+    Vendedor --> App
+    Administrador --> App
+
+    App --> Auth[Servico de Autenticacao com MFA]
+    App --> API[API / Backend]
+
+    API --> Authz[Camada de Autorizacao\nrevalida role e propriedade do recurso]
+    Authz --> DB[(Banco de Dados)]
+
+    API --> Pagamento[Servico de Pagamento externo]
+    API --> Notificacao[Servico de Notificacao / Mensagens]
+    API --> Logs[Logs e Monitoramento]
