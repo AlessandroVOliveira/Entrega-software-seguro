@@ -41,9 +41,15 @@ Cada ameaça relevante da Etapa 1 originou um risco correspondente, mantendo o m
 |---|---|---|---|---|---|---|---|
 | R01 | Spoofing (T01) | Atacante acessa a conta de um cliente usando credenciais roubadas ou reutilizadas e realiza compras fraudulentas | Ausência de autenticação multifator; sistema não detecta login de dispositivo ou local incomum | 3 | 3 | 9 | Alto |
 | R02 | Spoofing (T02) | Atacante cria uma conta de vendedor falsa se passando por marca conhecida para enganar compradores | Cadastro de vendedor sem verificação de identidade ou documentação | 3 | 2 | 6 | Médio |
+| R03 | Tampering (T03) | Usuário intercepta e altera o valor do pedido antes da confirmação do pagamento | Validação do valor do pedido ocorre apenas no cliente, sem revalidação no servidor | 3 | 3 | 9 | Alto |
+| R04 | Tampering (T04) | Vendedor ou atacante altera preço ou descrição de um anúncio já aprovado, sem nova validação | Ausência de reaprovação automática após edição de um anúncio publicado | 2 | 2 | 4 | Médio |
 
 ## 13.5 Justificativas
 
 **R01 — Sequestro de conta de cliente:** a probabilidade foi classificada como média-alta (3) porque ataques de credential stuffing são comuns e não dependem de uma vulnerabilidade específica do CompraKi, apenas do reuso de senhas pelos usuários — uma prática frequente. O impacto foi classificado como alto (3) porque a vítima sofre prejuízo financeiro direto e exposição de dados pessoais, mas o efeito fica restrito à conta comprometida, sem afetar a plataforma como um todo.
 
 **R02 — Conta de vendedor falsa:** a probabilidade foi classificada como média-alta (3) porque criar uma conta de vendedor exige apenas preencher um formulário, sem necessidade de conhecimento técnico. O impacto foi classificado como moderado (2) porque afeta principalmente os clientes que compraram daquele vendedor específico, e é parcialmente recuperável por meio de reembolso e suspensão da conta.
+
+**R03 — Alteração do valor do pedido:** a probabilidade foi classificada como média-alta (3) porque ferramentas de interceptação de requisições (proxy, ferramentas de desenvolvedor do navegador) são de fácil acesso, tornando a condição de exploração plausível em situações comuns de uso. O impacto foi classificado como alto (3) porque gera prejuízo financeiro direto e pode se repetir em múltiplos pedidos até ser corrigido.
+
+**R04 — Alteração de catálogo após aprovação:** a probabilidade foi classificada como média-baixa (2) porque depende de um vendedor especificamente mal-intencionado, uma condição menos genérica que um ataque externo. O impacto foi classificado como moderado (2) porque afeta compradores individuais de forma pontual e é recuperável via moderação e reembolso.
