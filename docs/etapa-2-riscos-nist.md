@@ -47,6 +47,8 @@ Cada ameaça relevante da Etapa 1 originou um risco correspondente, mantendo o m
 | R06 | Repudiation (T06) | Vendedor nega ter combinado um prazo ou condição informada por mensagem a um cliente | Mensagens sem registro imutável ou confiável da conversa | 2 | 1 | 2 | Baixo |
 | R07 | Information Disclosure (T07) | Dados pessoais e de pagamento de múltiplos usuários são expostos por falha de autorização no acesso ao banco de dados | Falha de controle de acesso (ex.: referência insegura a objeto) na API que consulta dados de usuário | 2 | 4 | 8 | Alto |
 | R08 | Information Disclosure (T08) | Vendedor acessa dados de pedidos e clientes de outros vendedores | Falha de segregação de dados por identificador do vendedor no painel | 2 | 3 | 6 | Médio |
+| R09 | Denial of Service (T09) | O checkout fica indisponível ou degradado em datas de alta demanda devido a um grande volume de requisições | Ausência de limitação de requisições (rate limiting) e de proteção contra automação no checkout | 3 | 3 | 9 | Alto |
+| R10 | Denial of Service (T10) | A performance da busca de produtos é degradada para todos os usuários por scraping agressivo | Ausência de limitação de requisições na API de busca | 3 | 1 | 3 | Baixo |
 
 ## 13.5 Justificativas
 
@@ -65,3 +67,7 @@ Cada ameaça relevante da Etapa 1 originou um risco correspondente, mantendo o m
 **R07 — Exposição do banco de dados de usuários:** a probabilidade foi classificada como média-baixa (2) porque depende da existência de uma falha específica de autorização (como uma referência insegura a objeto), e não de uma condição genérica do sistema. O impacto foi classificado como muito alto (4) porque pode expor dados pessoais e de pagamento de muitos usuários simultaneamente, com implicações legais relacionadas à LGPD e dano reputacional severo.
 
 **R08 — Acesso cruzado entre vendedores:** a probabilidade foi classificada como média-baixa (2) porque exige que um vendedor perceba e explore um padrão específico de identificadores previsíveis. O impacto foi classificado como alto (3) porque expõe dados pessoais de clientes de outros vendedores, embora o escopo fique limitado aos pedidos acessados por aquele vendedor.
+
+**R09 — Sobrecarga do checkout:** a probabilidade foi classificada como média-alta (3) porque picos de tráfego são previsíveis em datas promocionais e ferramentas de automação de requisições são de fácil acesso. O impacto foi classificado como alto (3) porque a indisponibilidade do checkout interrompe diretamente as vendas durante o período do ataque, mesmo sendo recuperável após a mitigação.
+
+**R10 — Degradação da busca por scraping:** a probabilidade foi classificada como média-alta (3) pela facilidade de automatizar requisições repetidas à busca. O impacto foi classificado como baixo (1) porque a degradação afeta a experiência de uso sem impedir totalmente compras ou pagamentos, sendo corrigível rapidamente com limitação de requisições.
