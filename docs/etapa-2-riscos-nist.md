@@ -45,6 +45,8 @@ Cada ameaça relevante da Etapa 1 originou um risco correspondente, mantendo o m
 | R04 | Tampering (T04) | Vendedor ou atacante altera preço ou descrição de um anúncio já aprovado, sem nova validação | Ausência de reaprovação automática após edição de um anúncio publicado | 2 | 2 | 4 | Médio |
 | R05 | Repudiation (T05) | Cliente nega ter realizado ou recebido uma compra para tentar obter reembolso indevido | Ausência de registro de auditoria confiável de confirmação de entrega | 3 | 2 | 6 | Médio |
 | R06 | Repudiation (T06) | Vendedor nega ter combinado um prazo ou condição informada por mensagem a um cliente | Mensagens sem registro imutável ou confiável da conversa | 2 | 1 | 2 | Baixo |
+| R07 | Information Disclosure (T07) | Dados pessoais e de pagamento de múltiplos usuários são expostos por falha de autorização no acesso ao banco de dados | Falha de controle de acesso (ex.: referência insegura a objeto) na API que consulta dados de usuário | 2 | 4 | 8 | Alto |
+| R08 | Information Disclosure (T08) | Vendedor acessa dados de pedidos e clientes de outros vendedores | Falha de segregação de dados por identificador do vendedor no painel | 2 | 3 | 6 | Médio |
 
 ## 13.5 Justificativas
 
@@ -59,3 +61,7 @@ Cada ameaça relevante da Etapa 1 originou um risco correspondente, mantendo o m
 **R05 — Negação de compra para reembolso indevido:** a probabilidade foi classificada como média-alta (3) porque fraudes de reembolso por negação de recebimento são um padrão comum e recorrente em e-commerce, não exigindo capacidade técnica. O impacto foi classificado como moderado (2) porque o prejuízo é pontual por pedido e recuperável, embora possa se acumular se o padrão se repetir com frequência.
 
 **R06 — Negação de combinação por mensagem:** a probabilidade foi classificada como média-baixa (2) porque depende de uma disputa específica surgir entre cliente e vendedor. O impacto foi classificado como baixo (1) porque o transtorno é pontual e pode ser mediado pela equipe de suporte, sem prejuízo financeiro direto à plataforma.
+
+**R07 — Exposição do banco de dados de usuários:** a probabilidade foi classificada como média-baixa (2) porque depende da existência de uma falha específica de autorização (como uma referência insegura a objeto), e não de uma condição genérica do sistema. O impacto foi classificado como muito alto (4) porque pode expor dados pessoais e de pagamento de muitos usuários simultaneamente, com implicações legais relacionadas à LGPD e dano reputacional severo.
+
+**R08 — Acesso cruzado entre vendedores:** a probabilidade foi classificada como média-baixa (2) porque exige que um vendedor perceba e explore um padrão específico de identificadores previsíveis. O impacto foi classificado como alto (3) porque expõe dados pessoais de clientes de outros vendedores, embora o escopo fique limitado aos pedidos acessados por aquele vendedor.
