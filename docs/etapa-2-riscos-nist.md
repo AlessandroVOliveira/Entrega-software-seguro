@@ -77,3 +77,22 @@ Cada ameaça relevante da Etapa 1 originou um risco correspondente, mantendo o m
 **R11 — Vendedor acessa funções administrativas:** a probabilidade foi classificada como baixa (1) porque depende de uma falha grave e específica na separação de permissões, algo incomum quando controles básicos de autorização existem. O impacto foi classificado como muito alto (4) porque comprometeria funções administrativas inteiras, incluindo moderação e acesso a dados de todos os usuários.
 
 **R12 — Escalonamento de privilégio via API de pedidos:** a probabilidade foi classificada como média-baixa (2) porque exige que o atacante identifique tecnicamente o endpoint administrativo e monte uma requisição manual, algo que exige algum conhecimento técnico, mas é viável. O impacto foi classificado como muito alto (4) porque permite fraude financeira direta (aprovação indevida de reembolsos) e representa perda de controle sobre um processo crítico.
+
+## 13.6 Priorização
+
+A pontuação por si só não decide a ordem final: riscos de mesma pontuação foram desempatados pela gravidade da consequência, pelo número de usuários potencialmente afetados e pela facilidade de recuperação.
+
+| Ordem | Risco | Pontuação | Motivo da prioridade |
+|---|---|---|---|
+| 1 | R12 | 8 | Permite fraude financeira direta e automatizável (aprovação indevida de reembolso), com perda de controle sobre um processo crítico; mesmo com probabilidade média-baixa, a facilidade de repetição do ataque uma vez descoberto o eleva à prioridade máxima |
+| 2 | R07 | 8 | Pode expor dados pessoais e de pagamento de muitos usuários simultaneamente, com implicações legais (LGPD) que vão além do prejuízo financeiro imediato |
+| 3 | R03 | 9 | Fraude financeira direta e recorrente, decorrente de uma falha estrutural (falta de revalidação no servidor) que tende a se repetir em outros pontos do sistema |
+| 4 | R01 | 9 | Ataque comum (credential stuffing) que afeta contas individuais repetidamente e é o risco mais provável de ocorrer no dia a dia da plataforma |
+| 5 | R09 | 9 | Interrompe vendas diretamente durante o período do ataque, com maior urgência em datas promocionais previsíveis |
+| 6 | R02 | 6 | Fraude contra clientes com dano reputacional, mas de escopo limitado a um vendedor por vez |
+| 7 | R08 | 6 | Violação de privacidade entre vendedores, com escopo limitado aos pedidos acessados |
+| 8 | R05 | 6 | Prejuízo financeiro recorrente, mas pontual por pedido e mais fácil de mitigar com confirmação de entrega |
+| 9 | R04 | 4 | Afeta compradores individuais e é recuperável via moderação |
+| 10 | R11 | 4 | Impacto muito alto, mas probabilidade baixa por depender de falha grave e específica de autorização |
+| 11 | R10 | 3 | Apenas degrada a experiência de uso, sem impedir vendas ou expor dados |
+| 12 | R06 | 2 | Menor pontuação e menor urgência entre todos os riscos identificados |
