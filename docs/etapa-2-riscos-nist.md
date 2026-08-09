@@ -96,3 +96,29 @@ A pontuação por si só não decide a ordem final: riscos de mesma pontuação 
 | 10 | R11 | 4 | Impacto muito alto, mas probabilidade baixa por depender de falha grave e específica de autorização |
 | 11 | R10 | 3 | Apenas degrada a experiência de uso, sem impedir vendas ou expor dados |
 | 12 | R06 | 2 | Menor pontuação e menor urgência entre todos os riscos identificados |
+
+## 14.1 Estratégias de tratamento
+
+Para cada risco, o grupo escolheu uma das quatro estratégias abaixo, justificada individualmente na seção 14.4:
+
+| Estratégia | Descrição |
+|---|---|
+| Evitar | Eliminar a atividade ou condição que dá origem ao risco |
+| Reduzir | Implementar medidas para diminuir a probabilidade ou o impacto do risco |
+| Compartilhar | Atribuir parte da operação ou das consequências a um terceiro |
+| Aceitar | Reconhecer e manter conscientemente o risco, com justificativa, aprovação e acompanhamento |
+
+A estratégia predominante no CompraKi é **Reduzir**, já que a maioria dos riscos decorre de controles ausentes ou incompletos (validação apenas no cliente, ausência de MFA, ausência de segregação de dados) que podem ser corrigidos sem eliminar a funcionalidade correspondente. O risco R06 é tratado como **Aceitar**, por ter impacto baixo e custo de mitigação desproporcional ao benefício.
+
+## 14.2 Funções do NIST CSF 2.0
+
+| Função | Finalidade |
+|---|---|
+| Govern | Definir políticas, responsabilidades, prioridades e critérios de decisão |
+| Identify | Conhecer ativos, dependências, vulnerabilidades e riscos |
+| Protect | Implementar salvaguardas para reduzir a probabilidade ou o impacto |
+| Detect | Identificar eventos suspeitos, falhas e possíveis incidentes |
+| Respond | Conter, analisar, comunicar e tratar incidentes |
+| Recover | Restaurar serviços e dados e reduzir os prejuízos causados |
+
+As funções não são controles em si — por exemplo, Protect é a função, "impedir alteração indevida do valor do pedido" é o resultado esperado, e "revalidação do valor no servidor" é o controle concreto que entrega esse resultado. O mapeamento de cada risco para as funções relevantes está na seção 14.3, e os controles concretos estão detalhados no plano de tratamento (seção 14.4).
