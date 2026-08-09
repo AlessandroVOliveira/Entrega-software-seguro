@@ -122,3 +122,26 @@ A estratégia predominante no CompraKi é **Reduzir**, já que a maioria dos ris
 | Recover | Restaurar serviços e dados e reduzir os prejuízos causados |
 
 As funções não são controles em si — por exemplo, Protect é a função, "impedir alteração indevida do valor do pedido" é o resultado esperado, e "revalidação do valor no servidor" é o controle concreto que entrega esse resultado. O mapeamento de cada risco para as funções relevantes está na seção 14.3, e os controles concretos estão detalhados no plano de tratamento (seção 14.4).
+
+## 14.3 Mapeamento dos riscos para o NIST CSF
+
+Apenas as funções efetivamente relacionadas a cada risco foram marcadas, evitando marcar todas automaticamente.
+
+| Risco | Govern | Identify | Protect | Detect | Respond | Recover |
+|---|---|---|---|---|---|---|
+| R01 | | | X | X | X | |
+| R02 | X | | X | | | |
+
+## 14.4 Plano de tratamento
+
+| Risco | Estratégia | Controles propostos | Funções relacionadas | Responsáveis | Evidências e verificação |
+|---|---|---|---|---|---|
+| R01 | Reduzir | Autenticação multifator (MFA) obrigatória no login; detecção de login a partir de dispositivo ou localização não reconhecida, com notificação ao usuário | Protect, Detect, Respond | Equipe de desenvolvimento (autenticação) | Teste automatizado bloqueando login sem o segundo fator; log de alertas de login suspeito |
+| R02 | Reduzir | Verificação de documento (CPF/CNPJ) e aprovação manual do primeiro anúncio de novos vendedores | Govern, Protect | Equipe de operações e moderação | Checklist de aprovação de vendedor; taxa de contas suspensas por documentação inválida |
+
+## 14.6 Estimativa do risco residual
+
+| Risco | Nível inicial | Nível residual esperado | Condição para aceitar o residual |
+|---|---|---|---|
+| R01 | Alto | Baixo | Taxa de bloqueio de login suspeito acima de 95% em testes de simulação |
+| R02 | Médio | Baixo | 100% dos novos vendedores com documento verificado antes da primeira venda |
