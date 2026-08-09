@@ -49,6 +49,8 @@ Cada ameaça relevante da Etapa 1 originou um risco correspondente, mantendo o m
 | R08 | Information Disclosure (T08) | Vendedor acessa dados de pedidos e clientes de outros vendedores | Falha de segregação de dados por identificador do vendedor no painel | 2 | 3 | 6 | Médio |
 | R09 | Denial of Service (T09) | O checkout fica indisponível ou degradado em datas de alta demanda devido a um grande volume de requisições | Ausência de limitação de requisições (rate limiting) e de proteção contra automação no checkout | 3 | 3 | 9 | Alto |
 | R10 | Denial of Service (T10) | A performance da busca de produtos é degradada para todos os usuários por scraping agressivo | Ausência de limitação de requisições na API de busca | 3 | 1 | 3 | Baixo |
+| R11 | Elevation of Privilege (T11) | Vendedor obtém acesso a funções reservadas a administradores por falha de autorização | Falha na separação de permissões entre as roles de vendedor e administrador | 1 | 4 | 4 | Médio |
+| R12 | Elevation of Privilege (T12) | Cliente comum executa ações administrativas, como aprovar reembolsos próprios, manipulando a API de pedidos | Verificação de permissão (role) feita apenas na interface, não em todas as chamadas do servidor | 2 | 4 | 8 | Alto |
 
 ## 13.5 Justificativas
 
@@ -71,3 +73,7 @@ Cada ameaça relevante da Etapa 1 originou um risco correspondente, mantendo o m
 **R09 — Sobrecarga do checkout:** a probabilidade foi classificada como média-alta (3) porque picos de tráfego são previsíveis em datas promocionais e ferramentas de automação de requisições são de fácil acesso. O impacto foi classificado como alto (3) porque a indisponibilidade do checkout interrompe diretamente as vendas durante o período do ataque, mesmo sendo recuperável após a mitigação.
 
 **R10 — Degradação da busca por scraping:** a probabilidade foi classificada como média-alta (3) pela facilidade de automatizar requisições repetidas à busca. O impacto foi classificado como baixo (1) porque a degradação afeta a experiência de uso sem impedir totalmente compras ou pagamentos, sendo corrigível rapidamente com limitação de requisições.
+
+**R11 — Vendedor acessa funções administrativas:** a probabilidade foi classificada como baixa (1) porque depende de uma falha grave e específica na separação de permissões, algo incomum quando controles básicos de autorização existem. O impacto foi classificado como muito alto (4) porque comprometeria funções administrativas inteiras, incluindo moderação e acesso a dados de todos os usuários.
+
+**R12 — Escalonamento de privilégio via API de pedidos:** a probabilidade foi classificada como média-baixa (2) porque exige que o atacante identifique tecnicamente o endpoint administrativo e monte uma requisição manual, algo que exige algum conhecimento técnico, mas é viável. O impacto foi classificado como muito alto (4) porque permite fraude financeira direta (aprovação indevida de reembolsos) e representa perda de controle sobre um processo crítico.
