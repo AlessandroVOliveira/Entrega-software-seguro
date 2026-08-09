@@ -139,6 +139,8 @@ Apenas as funções efetivamente relacionadas a cada risco foram marcadas, evita
 | R08 | | | X | X | | |
 | R09 | | | X | X | | X |
 | R10 | | | X | | | |
+| R11 | | | X | X | | |
+| R12 | | | X | X | X | |
 
 ## 14.4 Plano de tratamento
 
@@ -154,6 +156,22 @@ Apenas as funções efetivamente relacionadas a cada risco foram marcadas, evita
 | R08 | Reduzir | Corrigir a consulta do painel do vendedor para filtrar sempre pelo identificador do vendedor autenticado, nunca aceitando identificador vindo do cliente sem validação; log de tentativas de acesso a pedidos de outros vendedores | Protect, Detect | Equipe de backend | Teste automatizado tentando acessar pedido de outro vendedor e confirmando bloqueio |
 | R09 | Reduzir | Limitação de requisições (rate limiting) no endpoint de checkout; proteção anti-automação em picos de tráfego; plano de autoscaling para datas de alta demanda | Protect, Detect, Recover | Equipe de infraestrutura | Teste de carga simulando pico de requisições; métricas de disponibilidade do checkout durante o teste |
 | R10 | Reduzir | Limitação de requisições na API de busca por usuário/IP | Protect | Equipe de backend | Métricas de requisições bloqueadas por excesso na API de busca |
+| R11 | Reduzir | Revalidação de permissão (role) no servidor para toda rota do painel administrativo, independentemente da interface exibida; testes de autorização automatizados | Protect, Detect | Equipe de backend e segurança | Teste automatizado tentando acessar rota administrativa com conta de vendedor e confirmando bloqueio (HTTP 403) |
+| R12 | Reduzir | Revalidação de role no servidor antes de aprovar qualquer reembolso; log de auditoria de todas as aprovações, com alerta quando aprovado por conta não administrativa | Protect, Detect, Respond | Equipe de backend e pagamentos | Teste automatizado tentando aprovar reembolso com conta de cliente e confirmando bloqueio; auditoria mensal de reembolsos aprovados |
+
+## 14.5 Ordem inicial de implementação
+
+A ordem prioriza controles que corrigem um mesmo padrão estrutural recorrente — validação e verificação de permissão feitas apenas no lado do cliente ou apenas na interface — e que, por isso, reduzem vários riscos de uma só vez:
+
+1. **Revalidação no servidor de valores e permissões (R03, R11, R12):** corrige o mesmo padrão de falha (confiar em validação do lado do cliente ou da interface) presente em três riscos de pontuação alta ou média, incluindo o de maior prioridade (R12).
+2. **Correção do controle de acesso e criptografia de dados sensíveis (R07):** trata o risco de maior impacto potencial (exposição de dados de muitos usuários, com implicações legais).
+3. **Autenticação multifator para contas de cliente (R01):** mitiga o risco mais provável de ocorrer no dia a dia da plataforma.
+4. **Rate limiting e proteção anti-automação no checkout (R09):** protege a disponibilidade em datas de alta demanda, previsíveis no calendário do negócio.
+5. **Segregação de dados entre vendedores e verificação de identidade de novos vendedores (R08, R02):** controles de escopo mais restrito, mas que reduzem riscos de nível médio a alto.
+6. **Demais controles (R04, R05, R10, R11 quando não coberto acima):** implementados na sequência, por terem impacto ou probabilidade menores.
+7. **Aceitação formal do risco de mensagens (R06):** não exige implementação de controle técnico, apenas formalização da decisão de aceitar.
+
+Esta ordem poderá ser revisada nas próximas etapas, especialmente na Etapa 3, ao detalhar a arquitetura segura.
 
 ## 14.6 Estimativa do risco residual
 
@@ -169,3 +187,21 @@ Apenas as funções efetivamente relacionadas a cada risco foram marcadas, evita
 | R08 | Médio | Baixo | Teste automatizado de segregação por vendedor aprova em 100% dos casos |
 | R09 | Alto | Médio | Checkout mantém disponibilidade acima do SLA definido durante teste de carga simulando o pico real observado em datas promocionais |
 | R10 | Baixo | Baixo | Limitação de requisições reduz o volume de scraping sem afetar usuários legítimos, conforme monitoramento |
+| R11 | Médio | Baixo | Teste de autorização automatizado bloqueia 100% das tentativas de acesso indevido ao painel administrativo |
+| R12 | Alto | Médio | Auditoria mensal de reembolsos não encontra nenhuma aprovação fora do fluxo administrativo |
+
+## 15. Considerações finais
+
+Os riscos considerados mais importantes foram R12 (escalonamento de privilégio via API de pedidos) e R07 (exposição do banco de dados de usuários), por permitirem, respectivamente, fraude financeira direta e automatizável, e exposição de dados de muitos usuários com implicações legais relacionadas à LGPD. R03 (alteração do valor do pedido) e R01 (sequestro de conta) também tiveram prioridade alta por decorrerem de falhas comuns e prováveis de ocorrer no uso normal da plataforma.
+
+A priorização foi determinada principalmente pela combinação entre pontuação (probabilidade × impacto) e a gravidade das consequências: riscos com potencial de fraude financeira direta ou exposição de dados de muitos usuários foram priorizados mesmo quando a pontuação não era a mais alta entre todos.
+
+A estratégia de tratamento predominante foi **Reduzir**, aplicada a 11 dos 12 riscos, já que a maioria decorre de controles ausentes ou incompletos que podem ser corrigidos sem eliminar funcionalidades. Apenas R06 foi tratado com a estratégia **Aceitar**, por seu baixo impacto.
+
+As funções do NIST CSF 2.0 mais relevantes para o CompraKi foram **Protect** e **Detect**, presentes em praticamente todos os planos de tratamento, seguidas por **Respond** nos riscos de maior gravidade (R01, R05, R09, R12) e **Govern** nos riscos que envolvem decisões de política (R02, R06, R07).
+
+Os controles considerados essenciais foram: revalidação de valores e permissões no servidor (o controle que, isoladamente, mitiga o maior número de riscos prioritários), autenticação multifator, correção das falhas de controle de acesso (referências inseguras a objeto) e limitação de requisições no checkout.
+
+A principal dificuldade do grupo foi estimar probabilidade e impacto de forma defensável sem uma implementação real do CompraKi, apoiando-se em como falhas semelhantes costumam se comportar em sistemas de e-commerce reais. Também foi desafiador diferenciar claramente ameaça, vulnerabilidade e risco ao longo do registro, e evitar marcar funções do NIST automaticamente para todos os riscos.
+
+Como limitação, as estimativas de risco residual são projeções qualitativas — a redução real só poderá ser confirmada após a implementação, os testes e a coleta de evidências, o que ficará mais detalhado a partir da Etapa 3, quando os requisitos de segurança e a arquitetura forem formalizados.
