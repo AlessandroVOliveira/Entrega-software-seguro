@@ -168,7 +168,7 @@ A ordem prioriza controles que corrigem um mesmo padrão estrutural recorrente �
 3. **Autenticação multifator para contas de cliente (R01):** mitiga o risco mais provável de ocorrer no dia a dia da plataforma.
 4. **Rate limiting e proteção anti-automação no checkout (R09):** protege a disponibilidade em datas de alta demanda, previsíveis no calendário do negócio.
 5. **Segregação de dados entre vendedores e verificação de identidade de novos vendedores (R08, R02):** controles de escopo mais restrito, mas que reduzem riscos de nível médio a alto.
-6. **Demais controles (R04, R05, R10, R11 quando não coberto acima):** implementados na sequência, por terem impacto ou probabilidade menores.
+6. **Demais controles (R04, R05, R10):** implementados na sequência, por terem impacto ou probabilidade menores que os controles anteriores.
 7. **Aceitação formal do risco de mensagens (R06):** não exige implementação de controle técnico, apenas formalização da decisão de aceitar.
 
 Esta ordem poderá ser revisada nas próximas etapas, especialmente na Etapa 3, ao detalhar a arquitetura segura.
