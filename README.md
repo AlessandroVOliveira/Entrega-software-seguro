@@ -25,6 +25,7 @@ Sistema analisado: **CompraKi**, um marketplace de e-commerce (clientes, vendedo
 | Etapa 4 — Código Seguro | [`docs/etapa-4-codigo-seguro.md`](docs/etapa-4-codigo-seguro.md) |
 | Etapa 5 — Verificação de Vulnerabilidades | [`docs/etapa-5-verificacao-vulnerabilidades.md`](docs/etapa-5-verificacao-vulnerabilidades.md) |
 | Etapa 6 — Detecção de Intrusões | [`roteiros/etapa-6-deteccao-de-intrusoes.md`](roteiros/etapa-6-deteccao-de-intrusoes.md) |
+| Etapa 7 — DevSecOps e Vídeo Final | [`roteiros/etapa-7-devsecops-e-video-final.md`](roteiros/etapa-7-devsecops-e-video-final.md) |
 
 Os diagramas usados no documento (fonte e renderização) ficam em [`diagramas/`](diagramas/), organizados por etapa.
 
