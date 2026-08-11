@@ -33,7 +33,7 @@ flowchart LR
     App --> Auth[Servico de Autenticacao com MFA]
     App --> API[API / Backend]
 
-    API --> Authz[Camada de Autorizacao\nrevalida role e propriedade do recurso]
+    API --> Authz["Camada de Autorizacao<br/>revalida role e propriedade do recurso"]
     Authz --> DB[(Banco de Dados)]
 
     API --> Pagamento[Servico de Pagamento externo]
