@@ -25,3 +25,20 @@ O pipeline não deve avançar para a etapa seguinte quando qualquer uma das cond
 2. **Achado crítico não analisado** — se a varredura com o ZAP (Etapa 5) apontar um alerta de risco alto ou crítico sem análise e correção propostas.
 3. **Segredo encontrado no repositório** — como uma chave de API, senha ou token de acesso versionado por engano no código ou na configuração.
 4. **Dependência conhecida como vulnerável** sem atualização disponível ou aplicada, identificada na análise de dependências.
+
+## Roteiro do vídeo final
+
+Duração alvo: 5 a 8 minutos. Cada integrante apresenta a parte que produziu ao longo da disciplina, seguindo a mesma divisão por categoria STRIDE usada desde a Etapa 1.
+
+| Tempo | Bloco | Responsável | Conteúdo a apresentar |
+|---|---|---|---|
+| 0:00–0:30 | Abertura | P1 (Ariessa) | Nome do sistema (CompraKi), o que é (marketplace de e-commerce) e por que foi escolhido |
+| 0:30–2:00 | Ameaças STRIDE e casos de abuso | Todos (cada pessoa apresenta sua categoria: Spoofing, Tampering, Repudiation, Information Disclosure, Denial of Service, Elevation of Privilege) | Uma ameaça e o caso de abuso correspondente à categoria de cada um, em poucas frases |
+| 2:00–3:00 | Riscos prioritários | P6 (Douglas) | Os 3 riscos de maior prioridade (R12, R07, R03) e por que ficaram no topo da priorização |
+| 3:00–4:00 | Arquitetura segura | P1 (Ariessa) e P2 (Alessandro) | Os requisitos de segurança (RS01–RS03), o diagrama da arquitetura segura e as 3 decisões de arquitetura |
+| 4:00–5:00 | Código seguro | P3 (Valdir) e P4 (Leonardo) | As duas práticas de código seguro (controle de autorização e prevenção de IDOR) e os testes definidos antes da implementação |
+| 5:00–6:00 | Verificação de vulnerabilidades | P5 (Eric) | O ambiente testado (OWASP Juice Shop), a ferramenta (ZAP) e os 3 achados analisados |
+| 6:00–7:00 | Detecção de intrusões e pipeline DevSecOps | P6 (Douglas) | As 3 regras de detecção e como o pipeline DevSecOps integra todas as etapas |
+| 7:00–8:00 | Aprendizados e encerramento | Todos | O que cada um aprendeu de mais relevante durante o trabalho |
+
+A gravação, edição e publicação do vídeo ficam a cargo do grupo — este roteiro apenas organiza o conteúdo e o tempo de cada bloco.
