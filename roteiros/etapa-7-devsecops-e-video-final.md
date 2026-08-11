@@ -1,5 +1,7 @@
 # Etapa 7 — DevSecOps e Vídeo Final
 
+Esta etapa integra o que foi produzido nas Etapas 1 a 6 em um pipeline DevSecOps proposto para o CompraKi. Como o sistema não foi implementado, o pipeline é descritivo — não há automação real configurada — mas cada linha da tabela abaixo corresponde a um artefato que já existe no repositório, produzido em uma etapa anterior.
+
 ## Pipeline DevSecOps proposto
 
 O pipeline abaixo integra as atividades de segurança já produzidas nas Etapas 1 a 6, organizadas ao longo do ciclo de desenvolvimento do CompraKi.
