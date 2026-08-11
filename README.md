@@ -23,6 +23,7 @@ Sistema analisado: **CompraKi**, um marketplace de e-commerce (clientes, vendedo
 | Etapa 2 — Riscos e NIST CSF 2.0 | [`docs/etapa-2-riscos-nist.md`](docs/etapa-2-riscos-nist.md) |
 | Etapa 3 — Arquitetura Segura | [`docs/etapa-3-arquitetura-segura.md`](docs/etapa-3-arquitetura-segura.md) |
 | Etapa 4 — Código Seguro | [`docs/etapa-4-codigo-seguro.md`](docs/etapa-4-codigo-seguro.md) |
+| Etapa 5 — Verificação de Vulnerabilidades | [`docs/etapa-5-verificacao-vulnerabilidades.md`](docs/etapa-5-verificacao-vulnerabilidades.md) |
 
 Os diagramas usados no documento (fonte e renderização) ficam em [`diagramas/`](diagramas/), organizados por etapa.
 
