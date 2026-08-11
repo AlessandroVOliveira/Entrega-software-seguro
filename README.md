@@ -27,6 +27,4 @@ Sistema analisado: **CompraKi**, um marketplace de e-commerce (clientes, vendedo
 | Etapa 6 — Detecção de Intrusões | [`roteiros/etapa-6-deteccao-de-intrusoes.md`](roteiros/etapa-6-deteccao-de-intrusoes.md) |
 | Etapa 7 — DevSecOps e Vídeo Final | [`roteiros/etapa-7-devsecops-e-video-final.md`](roteiros/etapa-7-devsecops-e-video-final.md) |
 
-Os diagramas usados no documento (fonte e renderização) ficam em [`diagramas/`](diagramas/), organizados por etapa.
-
-Demais etapas serão adicionadas conforme o trabalho avança.
+Os diagramas usados no documento (fonte e renderização) ficam em [`diagramas/`](diagramas/), organizados por etapa. As evidências da Etapa 5 ficam em [`evidencias/etapa-5/`](evidencias/etapa-5/).
