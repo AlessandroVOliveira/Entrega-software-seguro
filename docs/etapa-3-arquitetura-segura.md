@@ -1,6 +1,6 @@
 # Etapa 3 — Projeto de uma Arquitetura Segura
 
-Esta etapa transforma os riscos e controles definidos na [Etapa 2](etapa-2-riscos-nist.md) em requisitos de segurança e decisões de arquitetura para o CompraKi, priorizando os três riscos de maior prioridade identificados na priorização geral (seção 13.6 da Etapa 2): R12, R07 e R03.
+Esta etapa transforma os riscos e controles definidos na [Etapa 2](etapa-2-riscos-nist.md) em requisitos de segurança e decisões de arquitetura para o CompraKi. Os requisitos de segurança e o mapeamento de vulnerabilidades (seções 18.1 e 18.2) focam nos três riscos de maior prioridade da priorização geral (seção 13.6 da Etapa 2): R12, R07 e R03. As decisões de arquitetura (seção 18.4) incluem esses três riscos e também R01, quarto colocado na priorização, por envolver um componente estrutural (o serviço de autenticação) que vale a pena isolar desde já.
 
 ## 18.1 Requisitos de segurança
 
