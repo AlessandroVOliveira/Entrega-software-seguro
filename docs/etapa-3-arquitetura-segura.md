@@ -36,12 +36,14 @@ flowchart LR
     API --> Authz["Camada de Autorizacao<br/>revalida role e propriedade do recurso"]
     Authz --> DB[(Banco de Dados)]
 
-    API --> Pagamento[Servico de Pagamento externo]
+    API --> Precificacao["Motor de Precificacao<br/>recalcula o valor do pedido a partir do catalogo"]
+    Precificacao --> DB
+    Precificacao --> Pagamento[Servico de Pagamento externo]
     API --> Notificacao[Servico de Notificacao / Mensagens]
     API --> Logs[Logs e Monitoramento]
 ```
 
-A camada de autorização é o principal controle novo em relação ao diagrama da Etapa 1: toda chamada à API passa por ela antes de tocar o banco de dados, garantindo que RS01 (revalidação de role) e RS02 (verificação de propriedade do recurso) sejam aplicados de forma centralizada, em vez de depender de cada rota implementar sua própria verificação. Os logs e o monitoramento também passam a aparecer explicitamente, dando suporte à detecção de tentativas de violação desses controles.
+A camada de autorização é um dos dois controles novos em relação ao diagrama da Etapa 1: toda chamada à API passa por ela antes de tocar o banco de dados, garantindo que RS01 (revalidação de role) e RS02 (verificação de propriedade do recurso) sejam aplicados de forma centralizada, em vez de depender de cada rota implementar sua própria verificação. O segundo controle novo é o motor de precificação: nenhuma cobrança chega ao serviço de pagamento sem antes passar por esse componente, que consulta o preço vigente de cada item no banco de dados e recalcula o valor total do pedido no servidor, atendendo RS03 e ignorando qualquer total recebido do cliente. Os logs e o monitoramento também passam a aparecer explicitamente, dando suporte à detecção de tentativas de violação desses controles.
 
 ## 18.4 Decisões de arquitetura
 

@@ -9,6 +9,8 @@ flowchart LR
     API --> Authz["Camada de Autorizacao<br/>revalida role e propriedade do recurso"]
     Authz --> DB[(Banco de Dados)]
 
-    API --> Pagamento[Servico de Pagamento externo]
+    API --> Precificacao["Motor de Precificacao<br/>recalcula o valor do pedido a partir do catalogo"]
+    Precificacao --> DB
+    Precificacao --> Pagamento[Servico de Pagamento externo]
     API --> Notificacao[Servico de Notificacao / Mensagens]
     API --> Logs[Logs e Monitoramento]
