@@ -61,3 +61,36 @@ function obterPedido(pedidoId, usuarioAutenticado):
 **Resultado esperado:** o servidor sempre verifica se o recurso solicitado pertence ao usuário autenticado antes de retornar qualquer dado, de forma que identificadores sequenciais ou previsíveis não sejam suficientes para acessar dados de outros usuários.
 
 **Referência OWASP:** OWASP Cheat Sheet Series, na parte de controle de acesso — prevenção de Insecure Direct Object References (IDOR), relacionada ao OWASP API Security Top 10 (API1:2023 — Broken Object Level Authorization), já citado na Etapa 3 para o risco R07.
+
+## Prática 3 — Revalidação do valor do pedido no servidor
+
+**Risco e requisito relacionados:** R03 (Tampering) / RS03 — o sistema deve recalcular, no servidor, o valor total do pedido a partir do catálogo de preços vigente, ignorando qualquer total enviado pelo cliente (ver [Etapa 2](etapa-2-riscos-nist.md) e [Etapa 3](etapa-3-arquitetura-segura.md), que introduziu o motor de precificação no diagrama de arquitetura).
+
+**Testes de segurança (definidos antes da implementação):**
+
+| Teste | Entrada ou ação | Resultado esperado |
+|---|---|---|
+| TS01 | Cliente monta o carrinho normalmente e finaliza o checkout sem alterar nada na requisição | O pagamento é processado pelo valor calculado no servidor, igual ao valor exibido na interface |
+| TS02 | Cliente intercepta a requisição de checkout e altera o campo de valor total para um valor menor antes de enviá-la | O servidor ignora o valor recebido, recalcula o total a partir do catálogo e processa o pagamento pelo valor correto — a tentativa de alteração é registrada em log |
+
+**Implementação (pseudocódigo):**
+
+```
+function confirmarPagamento(carrinhoId, usuarioAutenticado, valorInformadoPeloCliente):
+    carrinho = buscarCarrinho(carrinhoId, usuarioAutenticado)
+
+    valorRecalculado = 0
+    para cada item em carrinho.itens:
+        precoVigente = buscarPrecoAtual(item.produtoId)  // sempre do catálogo, nunca do cliente
+        valorRecalculado = valorRecalculado + (precoVigente * item.quantidade)
+
+    if valorInformadoPeloCliente != valorRecalculado:
+        registrarTentativaNaoAutorizada(usuarioAutenticado, carrinhoId, valorInformadoPeloCliente, valorRecalculado)
+
+    resultado = processarPagamento(usuarioAutenticado, valorRecalculado)  // nunca usa valorInformadoPeloCliente
+    retornar resultado
+```
+
+**Resultado esperado:** o valor cobrado nunca depende do que o cliente envia na requisição — o servidor sempre recalcula o total a partir do preço vigente de cada item no catálogo, de forma que interceptar e alterar a requisição de checkout não seja suficiente para pagar um valor diferente do real.
+
+**Referência OWASP:** CWE-602 (Client-Side Enforcement of Server-Side Security), já citado na Etapa 3 para o risco R03 — toda regra de negócio que afeta valores monetários deve ser reforçada no servidor, independentemente do que a interface calcula ou exibe.
