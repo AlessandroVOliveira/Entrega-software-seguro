@@ -198,7 +198,7 @@ A priorização foi determinada principalmente pela combinação entre pontuaç�
 
 A estratégia de tratamento predominante foi **Reduzir**, aplicada a 11 dos 12 riscos, já que a maioria decorre de controles ausentes ou incompletos que podem ser corrigidos sem eliminar funcionalidades. Apenas R06 foi tratado com a estratégia **Aceitar**, por seu baixo impacto.
 
-As funções do NIST CSF 2.0 mais relevantes para o CompraKi foram **Protect** e **Detect**, presentes em praticamente todos os planos de tratamento, seguidas por **Respond** nos riscos de maior gravidade (R01, R05, R09, R12) e **Govern** nos riscos que envolvem decisões de política (R02, R06, R07).
+As funções do NIST CSF 2.0 mais relevantes para o CompraKi foram **Protect** e **Detect**, presentes em praticamente todos os planos de tratamento, seguidas por **Respond** nos riscos de maior gravidade (R01, R05, R07, R12) — R09 fica de fora desse grupo por ter sua resposta concentrada em Recover, já que a mitigação é a normalização do serviço, não uma investigação de incidente — e **Govern** nos riscos que envolvem decisões de política (R02, R06, R07).
 
 Os controles considerados essenciais foram: revalidação de valores e permissões no servidor (o controle que, isoladamente, mitiga o maior número de riscos prioritários), autenticação multifator, correção das falhas de controle de acesso (referências inseguras a objeto) e limitação de requisições no checkout.
 
