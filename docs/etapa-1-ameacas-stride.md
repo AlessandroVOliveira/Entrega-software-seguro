@@ -97,7 +97,7 @@ A tabela abaixo aplica as seis categorias do STRIDE aos ativos e fluxos do Compr
 | T02 | Spoofing | Conta do vendedor | Atacante cria uma conta de vendedor falsa se passando por uma marca conhecida para enganar compradores | Fraude contra clientes, dano à reputação da plataforma |
 | T03 | Tampering | Valor do pedido | Usuário mal-intencionado intercepta e altera o valor do pedido antes da confirmação do pagamento | Prejuízo financeiro à plataforma ou ao vendedor |
 | T04 | Tampering | Catálogo de produtos | Vendedor ou atacante altera descrição ou preço de um produto de forma não autorizada após a aprovação do anúncio | Enganar compradores, prejuízo financeiro, possíveis problemas jurídicos |
-| T05 | Repudiation | Pedido/pagamento | Cliente nega ter realizado uma compra para tentar obter reembolso indevido, na ausência de registro de auditoria confiável | Prejuízo financeiro ao vendedor/plataforma, disputas sem resolução clara |
+| T05 | Repudiation | Pedido/pagamento | Cliente recebe o produto, mas nega o recebimento para tentar obter reembolso indevido, na ausência de registro de auditoria confiável | Prejuízo financeiro ao vendedor/plataforma, disputas sem resolução clara |
 | T06 | Repudiation | Mensagens entre cliente e vendedor | Vendedor nega ter combinado um prazo ou condição informada por mensagem, na ausência de um log confiável da conversa | Disputas sem resolução, perda de confiança na plataforma |
 | T07 | Information Disclosure | Banco de dados de usuários | Falha de autorização expõe dados pessoais e de pagamento de outros usuários | Violação de privacidade, dano reputacional, exposição a fraude |
 | T08 | Information Disclosure | Painel do vendedor | Vendedor consegue visualizar dados de pedidos e clientes de outros vendedores por falha de segregação entre contas | Violação de privacidade de clientes, vazamento de dados comerciais |
@@ -150,7 +150,7 @@ Cada caso de abuso a seguir foi elaborado a partir de uma das ameaças identific
 
 **Categorias STRIDE relacionadas:** Tampering.
 
-### CA03 — Negação de compra para obter reembolso indevido
+### CA03 — Negação de recebimento para obter reembolso indevido
 
 **Ator:** cliente mal-intencionado.
 
@@ -160,8 +160,8 @@ Cada caso de abuso a seguir foi elaborado a partir de uma das ameaças identific
 
 **Fluxo de abuso:**
 1. O cliente realiza e recebe o pedido normalmente.
-2. O cliente alega ao suporte que nunca fez a compra ou nunca recebeu o produto.
-3. Na ausência de evidências consistentes, a plataforma processa o reembolso.
+2. O cliente alega ao suporte que nunca recebeu o produto.
+3. Na ausência de evidências consistentes de entrega, a plataforma processa o reembolso.
 4. O cliente mantém o produto e recebe o dinheiro de volta.
 
 **Impacto:** prejuízo financeiro ao vendedor e à plataforma, incentivo a fraudes recorrentes.
